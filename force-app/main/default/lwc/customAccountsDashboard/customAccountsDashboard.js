@@ -26,7 +26,7 @@ export default class AccountDashboard extends LightningElement
     {
         getAccounts()
             .then(result => {
-                this.accounts = result;
+                this.accounts = result || [];
             })
             .catch(error => {
                 console.error(error);
@@ -41,7 +41,7 @@ export default class AccountDashboard extends LightningElement
     searchAccounts() {
         searchAccounts({ name: this.searchTerm })
             .then(result => {
-                this.accounts = result;
+                this.accounts = result || [];
             })
             .catch(error => {
                 console.error(error);

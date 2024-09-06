@@ -6,9 +6,9 @@
         </div>
         <div class="account-list">
             <template for:each={accounts} for:item="account">
-                <div class="account-item">
+                <div class="account-item" key={account.Id}>
                     <div class="account-name">{account.Name}</div>
-                    <lightning-button label="Delete" onclick={() => handleDelete(account.Id)}></lightning-button>
+                    <lightning-button label="Delete" onclick={handleDelete} data-account-id={account.Id}></lightning-button>
                 </div>
             </template>
         </div>

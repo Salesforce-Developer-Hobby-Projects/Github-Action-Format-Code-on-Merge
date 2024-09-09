@@ -10,6 +10,10 @@ jobs:
   prettier:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [20]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -25,14 +29,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Prettify code
-        uses: creyD/prettier_action@v4.3
-        with:
-          # prettier_options: --write **/*.{js,md}
-          prettier_plugins: "prettier-plugin-apex @prettier/plugin-xml"
-          prettier_options: --check **/*.{js,md,html,css}
-          only_changed: True
-          dry: True
+      # - name: Prettify code
+      #   uses: creyD/prettier_action@v4.3
+      #   with:
+      #     prettier_plugins: "prettier-plugin-apex @prettier/plugin-xml"
+      #     prettier_options: --check **/*.{js,md,html,css}
+      #     only_changed: True
+      #     dry: True
 
   # prettier:
   #   name: Prettier
@@ -52,6 +55,6 @@ jobs:
   #     - name: Install dependencies
   #       # run: pnpm install -D
   #       run: npm install
-  #     - name: Check formatting with Prettier
-  #       # run: pnpm prettier:check
-  #       run: npm run prettier:verify
+      - name: Check formatting with Prettier
+        # run: pnpm prettier:check
+        run: npm run prettier:verify

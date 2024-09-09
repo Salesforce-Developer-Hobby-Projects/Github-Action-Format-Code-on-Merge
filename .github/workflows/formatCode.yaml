@@ -23,7 +23,7 @@ jobs:
         with:
           # prettier_options: --write **/*.{js,md}
           prettier_plugins: "prettier-plugin-apex @prettier/plugin-xml"
-          prettier_options: --check **/*.{js,md,html,cls}
+          prettier_options: --check **/*.{js,md,html,css}
           only_changed: True
           dry: True
 

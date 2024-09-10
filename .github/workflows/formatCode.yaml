@@ -57,4 +57,4 @@ jobs:
   #       run: npm install
       - name: Test Prettier command
         # run: pnpm prettier:check
-        run: npm run prettier
+        run: npm run prettier:check

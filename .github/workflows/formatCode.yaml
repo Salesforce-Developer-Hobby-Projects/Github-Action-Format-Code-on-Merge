@@ -56,11 +56,11 @@ jobs:
   #       # run: pnpm install -D
   #       run: npm install
       - name: Test Prettier command CHECK
-        run: npm run prettier:check
+        run: npm run prettier:verify
 
       - name:  Test Prettier command WRITE
         if: failure()
-        run: echo "Prettier check failed"
+        run: npm run prettier
 
       - name:  Test Prettier command WRITE
         if: success()

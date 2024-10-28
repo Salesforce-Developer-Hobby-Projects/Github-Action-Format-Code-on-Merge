@@ -22,6 +22,10 @@ jobs:
           # This is important to fetch the changes to the previous commit
           fetch-depth: 0
 
+      - name: Dump GitHub context
+        env: GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -30,6 +34,7 @@ jobs:
         run: npm install -D
 
       - name: Prettify code
+        id: prettier
         uses: creyD/prettier_action@v4.3
         with:
           prettier_plugins: "prettier-plugin-apex @prettier/plugin-xml"
@@ -42,10 +47,13 @@ jobs:
 
       - name:  Test Prettier command WRITE
         if: failure()
-        run: npm run prettier
+        run: npm run prettier && git status
 
       - name:  Test Prettier command WRITE
         if: success()
         run: echo "Prettier check passed"
+
+      # - name: Conidtionally commit changes
+      #   if: 
 
       # commiit changes 

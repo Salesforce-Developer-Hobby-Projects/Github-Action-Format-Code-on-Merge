@@ -39,7 +39,7 @@ jobs:
         uses: creyD/prettier_action@v4.3
         with:
           prettier_plugins: "prettier-plugin-apex @prettier/plugin-xml"
-          prettier_options: --check **/*.{js,md,html,css}
+          prettier_options: --check **/*.{js,md,html,css,cls}
           only_changed: True
           dry: True
 

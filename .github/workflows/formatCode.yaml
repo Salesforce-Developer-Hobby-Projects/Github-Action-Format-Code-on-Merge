@@ -39,16 +39,17 @@ jobs:
         uses: creyD/prettier_action@v4.3
         with:
           prettier_plugins: "prettier-plugin-apex @prettier/plugin-xml"
-          prettier_options: --check **/*.{js,md,html,css,cls}
+          # prettier_options: --check **/*.{js,md,html,css,cls}
+          prettier_options: --write **/*.{js,md,html,css,cls}
           only_changed: True
           dry: True
 
       # - name: Test Prettier command CHECK
       #   run: npm run prettier:verify
 
-      - name:  Test Prettier command WRITE
-        if: failure()
-        run: npm run prettier && git status && git add .
+      # - name:  Test Prettier command WRITE
+      #   if: failure()
+      #   run: npm run prettier && git status && git add .
 
       # - name:  Test Prettier command WRITE
       #   if: success()

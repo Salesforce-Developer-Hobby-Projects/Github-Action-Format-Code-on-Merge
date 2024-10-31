@@ -58,3 +58,10 @@ jobs:
       #   if: 
 
       # commiit changes 
+      - name: Commit changes
+      - uses: stefanzweifel/git-auto-commit-action@v4.1.6
+        with:
+          commit_message: Format changed file with prettier
+          # commit_user_name: My GitHub Actions Bot # defaults to "github-actions[bot]"
+          commit_user_email: andrew.chen+github-actions-bot@tython.co # defaults to "41898282+github-actions[bot]@users.noreply.github.com"
+          # commit_author: Author <actions@github.com> # defaults to author of the commit that triggered the run

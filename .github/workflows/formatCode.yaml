@@ -48,7 +48,7 @@ jobs:
 
       - name:  Test Prettier command WRITE
         if: failure()
-        run: npm run prettier && git status
+        run: npm run prettier && git status && git add .
 
       # - name:  Test Prettier command WRITE
       #   if: success()

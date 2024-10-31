@@ -59,7 +59,7 @@ jobs:
 
       # commiit changes 
       - name: Commit changes
-      - uses: stefanzweifel/git-auto-commit-action@v4.1.6
+        uses: stefanzweifel/git-auto-commit-action@v4.1.6
         with:
           commit_message: Format changed file with prettier
           # commit_user_name: My GitHub Actions Bot # defaults to "github-actions[bot]"

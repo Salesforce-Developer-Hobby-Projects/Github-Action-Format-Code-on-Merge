@@ -50,9 +50,9 @@ jobs:
         if: failure()
         run: npm run prettier && git status
 
-      - name:  Test Prettier command WRITE
-        if: success()
-        run: echo "Prettier check passed"
+      # - name:  Test Prettier command WRITE
+      #   if: success()
+      #   run: echo "Prettier check passed"
 
       # - name: Conidtionally commit changes
       #   if: 

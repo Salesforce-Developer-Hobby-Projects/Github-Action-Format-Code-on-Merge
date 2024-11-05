@@ -21,6 +21,8 @@ public class AccountController
         }
         return [SELECT Id, Name FROM Account WHERE Name LIKE :name];
     }
+    return [SELECT Id, Name FROM Account WHERE Name LIKE :name];
+  }
 
     @AuraEnabled
     public static Id createAccount( Account account ) 
@@ -46,6 +48,7 @@ public class AccountController
             throw new AuraHandledException('Error creating account: ' + e.getMessage());
         }
     }
+  }
 
     @AuraEnabled
     public static void deleteAccount( Id accountId ) {
@@ -61,4 +64,5 @@ public class AccountController
             throw new AuraHandledException('Error deleting account: ' + e.getMessage());
         }
     }
+  }
 }

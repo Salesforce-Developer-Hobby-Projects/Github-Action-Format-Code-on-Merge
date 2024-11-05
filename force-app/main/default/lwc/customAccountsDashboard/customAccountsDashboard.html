@@ -1,20 +1,50 @@
 <!-- AccountDashboard.html -->
 <template>
-    <div class="account-dashboard">
+    <div 
+    class="account-dashboard"
+    >
         <div class="search-container">
-            <lightning-input type="search" label="Search" value={searchTerm} onchange={handleSearchChange}></lightning-input>
+        <lightning-input type="search" 
+            label="Search" value={searchTerm} 
+        onchange={handleSearchChange}></lightning-input>
         </div>
-        <div class="account-list">
+        <div class="account-list"   >
             <template for:each={accounts} for:item="account">
                 <div class="account-item" key={account.Id}>
-                    <div class="account-name">{account.Name}</div>
-                    <lightning-button label="Delete" onclick={handleDelete} data-account-id={account.Id}></lightning-button>
+                <div class="account-name">{account.Name}</div>
+                <lightning-button label="Delete" onclick={handleDelete} data-account-id={account.Id}>
+                </lightning-button>
                 </div>
             </template>
         </div>
-        <div class="create-container">
+        <div 
+        class="create-container">
             <lightning-input type="text" label="Name" value={newAccountName} onchange={handleNameChange}></lightning-input>
             <lightning-button label="Create" onclick={handleCreate}></lightning-button>
         </div>
+    </div>
+    <div class="account-list">
+      <template for:each={accounts} for:item="account">
+        <div class="account-item" key={account.Id}>
+          <div class="account-name">{account.Name}</div>
+          <lightning-button
+            label="Delete"
+            onclick={handleDelete}
+            data-account-id={account.Id}
+          ></lightning-button>
+        </div>
+      </template>
+    </div>
+    <div class="create-container">
+      <lightning-input
+        type="text"
+        label="Name"
+        value={newAccountName}
+        onchange={handleNameChange}
+      ></lightning-input>
+      <lightning-button
+        label="Create"
+        onclick={handleCreate}
+      ></lightning-button>
     </div>
 </template>

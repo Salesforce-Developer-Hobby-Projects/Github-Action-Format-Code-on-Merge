@@ -1,0 +1,77 @@
+name: Code Quality checks
+on:
+  # pull_request:
+  #   branches: [main]
+
+  merge_group:
+    types: [checks_requested]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+# permissions:
+#   actions: write
+#   pull-requests: write
+
+jobs:
+
+  prettier:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          # This is important to fetch the changes to the previous commit
+          fetch-depth: 0
+
+      - name: Dump GitHub context
+        env: 
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm install -D
+
+      - name: Prettify code
+        id: prettier
+        uses: creyD/prettier_action@v4.3
+        with:
+          prettier_plugins: "prettier-plugin-apex @prettier/plugin-xml"
+          prettier_options: --check **/*.{js,md,html,css,cls}
+          # prettier_options: --write **/*.{js,md,html,css,cls}
+          only_changed: True
+          # dry: True
+
+      # - name: Test Prettier command CHECK
+      #   run: npm run prettier:verify
+
+      # - name:  Test Prettier command WRITE
+      #   if: failure()
+      #   run: npm run prettier && git status && git add .
+
+      # - name:  Test Prettier command WRITE
+      #   if: success()
+      #   run: echo "Prettier check passed"
+
+      # - name: Conidtionally commit changes
+      #   if: 
+
+      # commiit changes 
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4.1.6
+        with:
+          commit_message: Format changed file with prettier
+          # commit_user_name: My GitHub Actions Bot # defaults to "github-actions[bot]"
+          commit_user_email: andrew.chen+github-actions-bot@tython.co # defaults to "41898282+github-actions[bot]@users.noreply.github.com"
+          # commit_author: Author <actions@github.com> # defaults to author of the commit that triggered the run

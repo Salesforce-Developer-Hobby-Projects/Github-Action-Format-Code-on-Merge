@@ -1,7 +1,8 @@
 name: Code Quality checks
 on:
-  # pull_request:
-  #   branches: [main]
+  # does this require both pull_request and merge_group events?
+  pull_request:
+    branches: [main]
 
   merge_group:
     types: [checks_requested]

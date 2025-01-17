@@ -1,31 +1,14 @@
 <!-- AccountDashboard.html -->
 <template>
-  <h1>Account Dashboard
-
-    
-  </h1>
-    <div 
-    class="account-dashboard"
-    >
-        <div class="search-container">
-        <lightning-input type="search" 
-            label="Search" value={searchTerm} 
-        onchange={handleSearchChange}></lightning-input>
-        </div>
-        <div class="account-list"   >
-            <template for:each={accounts} for:item="account">
-                <div class="account-item" key={account.Id}>
-                <div class="account-name">{account.Name}</div>
-                <lightning-button label="Delete" onclick={handleDelete} data-account-id={account.Id}>
-                </lightning-button>
-                </div>
-            </template>
-        </div>
-        <div 
-        class="create-container">
-            <lightning-input type="text" label="Name" value={newAccountName} onchange={handleNameChange}></lightning-input>
-            <lightning-button label="Create" onclick={handleCreate}></lightning-button>
-        </div>
+  <h1>Account Dashboard</h1>
+  <div class="account-dashboard">
+    <div class="search-container">
+      <lightning-input
+        type="search"
+        label="Search"
+        value={searchTerm}
+        onchange={handleSearchChange}
+      ></lightning-input>
     </div>
     <div class="account-list">
       <template for:each={accounts} for:item="account">
@@ -35,7 +18,8 @@
             label="Delete"
             onclick={handleDelete}
             data-account-id={account.Id}
-          ></lightning-button>
+          >
+          </lightning-button>
         </div>
       </template>
     </div>
@@ -51,4 +35,26 @@
         onclick={handleCreate}
       ></lightning-button>
     </div>
+  </div>
+  <div class="account-list">
+    <template for:each={accounts} for:item="account">
+      <div class="account-item" key={account.Id}>
+        <div class="account-name">{account.Name}</div>
+        <lightning-button
+          label="Delete"
+          onclick={handleDelete}
+          data-account-id={account.Id}
+        ></lightning-button>
+      </div>
+    </template>
+  </div>
+  <div class="create-container">
+    <lightning-input
+      type="text"
+      label="Name"
+      value={newAccountName}
+      onchange={handleNameChange}
+    ></lightning-input>
+    <lightning-button label="Create" onclick={handleCreate}></lightning-button>
+  </div>
 </template>

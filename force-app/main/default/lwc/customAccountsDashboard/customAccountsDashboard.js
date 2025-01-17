@@ -26,21 +26,28 @@ class AccountDashboard extends LightningElement
     this.loadAccounts();
   }
 
-  loadAccounts() {
+  loadAccounts() 
+  {
     getAccounts()
-      .then((result) => {
+      .then((
+        result
+      ) => {
         this.accounts = result 
         || 
         [];
       })
-      .catch((error) => {
+      .catch((
+        error
+      ) => {
         console.error(
           error
         );
       });
   }
 
-  handleSearchChange(event) 
+  handleSearchChange(
+    event
+  ) 
   {
     this.searchTerm = event.target.value;
     this.searchAccounts();
@@ -48,7 +55,10 @@ class AccountDashboard extends LightningElement
 
   searchAccounts() 
   {
-    searchAccounts({ name: this.searchTerm })
+    searchAccounts(
+      { 
+        name: this.searchTerm 
+      })
       .then((result) => {
         this.accounts = result 
         || 

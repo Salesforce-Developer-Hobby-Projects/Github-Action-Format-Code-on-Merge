@@ -1,7 +1,7 @@
 // AccountDashboard.js
 import { LightningElement, track, wire } from "lwc";
 
-import getAccounts from\
+import getAccounts from
  "@salesforce/apex/AccountController.getAllAccounts";
 
 import searchAccounts from 

@@ -9,52 +9,19 @@ import createAccount from "@salesforce/apex/AccountController.createAccount";
 
 import deleteAccount from "@salesforce/apex/AccountController.deleteAccount";
 
-export default class AccountDashboard extends LightningElement 
-{
+export default class AccountDashboard extends LightningElement {
   @track searchTerm = "";
 
   @track newAccountName = "";
 
   @track accounts = [];
 
-  connectedCallback() 
-  {
+  connectedCallback() {
     this.loadAccounts();
   }
 
-  loadAccounts() 
-  {
+  loadAccounts() {
     getAccounts()
-      .then((
-        result
-      ) => {
-        this.accounts = result 
-        || 
-        [];
-      })
-      .catch((
-        error
-      ) => {
-        console.error(
-          error
-        );
-      });
-  }
-
-  handleSearchChange(
-    event
-  ) 
-  {
-    this.searchTerm = event.target.value;
-    this.searchAccounts();
-  }
-
-  searchAccounts() 
-  {
-    searchAccounts(
-      { 
-        name: this.searchTerm 
-      })
       .then((result) => {
         this.accounts = result || [];
       })
@@ -63,16 +30,31 @@ export default class AccountDashboard extends LightningElement
       });
   }
 
-  handleNameChange(event) 
-  {
+  handleSearchChange(event) {
+    this.searchTerm = event.target.value;
+    this.searchAccounts();
+  }
+
+  searchAccounts() {
+    searchAccounts({
+      name: this.searchTerm
+    })
+      .then((result) => {
+        this.accounts = result || [];
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  handleNameChange(event) {
     this.newAccountName = event.target.value;
   }
 
-  handleCreate() 
-  {
-    createAccount({ 
+  handleCreate() {
+    createAccount({
       name: this.newAccountName
-     })
+    })
       .then(() => {
         this.newAccountName = "";
         this.loadAccounts();
@@ -82,29 +64,22 @@ export default class AccountDashboard extends LightningElement
       });
   }
 
-  loadAccounts() 
-  {
+  loadAccounts() {
     getAccounts()
-      .then((
-        result
-      ) => {
+      .then((result) => {
         this.accounts = result || [];
       })
-      .catch((
-        error
-      ) => {
+      .catch((error) => {
         console.error(error);
       });
   }
 
-  handleSearchChange(event) 
-  {
+  handleSearchChange(event) {
     this.searchTerm = event.target.value;
     this.searchAccounts();
   }
 
-  searchAccounts() 
-  {
+  searchAccounts() {
     searchAccounts({ name: this.searchTerm })
       .then((result) => {
         this.accounts = result || [];
@@ -118,8 +93,7 @@ export default class AccountDashboard extends LightningElement
     this.newAccountName = event.target.value;
   }
 
-  handleCreate() 
-  {
+  handleCreate() {
     createAccount({ name: this.newAccountName })
       .then(() => {
         this.newAccountName = "";
@@ -130,8 +104,7 @@ export default class AccountDashboard extends LightningElement
       });
   }
 
-  handleDelete(event) 
-  {
+  handleDelete(event) {
     const accountId = event.target.dataset.accountId;
     deleteAccount({ accountId })
       .then(() => {

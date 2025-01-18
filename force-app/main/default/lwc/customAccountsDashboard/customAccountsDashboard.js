@@ -110,7 +110,7 @@ export default class AccountDashboard extends LightningElement
         console.error(error);
       });
   }
-  Branch rules  handleDelete(event) {
+  handleDelete(event) {
     const accountId = event.target.dataset.accountId;
     deleteAccount({ accountId })
       .then(() => {

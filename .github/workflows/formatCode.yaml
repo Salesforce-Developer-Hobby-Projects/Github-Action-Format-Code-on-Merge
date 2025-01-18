@@ -18,7 +18,7 @@ concurrency:
 jobs:
 
   prettier:
-    name: Prettify (20)
+    name: Prettify
     runs-on: ubuntu-latest
 
     strategy:

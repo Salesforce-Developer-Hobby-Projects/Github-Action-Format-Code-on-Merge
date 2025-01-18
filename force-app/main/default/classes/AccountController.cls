@@ -8,7 +8,8 @@ public class AccountController {
   }
 
   @AuraEnabled
-  public static List<Account> getAccountsByName(String name) {
+  public static List<Account> getAccountsByName(String name) 
+  {
     // if name is null or empty, return all accounts
     if (String.isBlank(name)) {
       return getAllAccounts();
@@ -17,11 +18,14 @@ public class AccountController {
   }
 
   @AuraEnabled
-  public static Id createAccount(Account account) {
+  public static Id createAccount(Account account) 
+  {
     try {
+     
       Database.SaveResult result = Database.insert(account, true);
 
-      if (!result.isSuccess()) {
+      if (
+        !result.isSuccess()) {
         System.debug(
           'Error creating account: ' + result.getErrors()[0].getMessage()
         );
@@ -32,7 +36,9 @@ public class AccountController {
       }
 
       return result.getId();
-    } catch (DmlException e) {
+    } catch (
+      DmlException e) 
+      {
       System.debug('Error creating account: ' + e.getMessage());
       throw new AuraHandledException(
         'Error creating account: ' + e.getMessage()

@@ -3,9 +3,14 @@ on:
   # does this require both pull_request and merge_group events?
   pull_request:
     branches: [main]
+    types:
+      - closed
+    paths:
+      - '**.js'
+      - '**.cls'
 
-  merge_group:
-    types: [checks_requested]
+  # merge_group:
+    # types: [checks_requested]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -19,6 +24,7 @@ jobs:
 
   prettier:
     name: Prettify
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     strategy:
@@ -50,8 +56,8 @@ jobs:
         uses: creyD/prettier_action@v4.3
         with:
           prettier_plugins: "prettier-plugin-apex @prettier/plugin-xml"
-          prettier_options: --check **/*.{js,md,html,css,cls}
-          # prettier_options: --write **/*.{js,md,html,css,cls}
+          # prettier_options: --check **/*.{js,md,html,css,cls}
+          prettier_options: --write **/*.{js,md,html,css,cls}
           only_changed: True
           # dry: True
 

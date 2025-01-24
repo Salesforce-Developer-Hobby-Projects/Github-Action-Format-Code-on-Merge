@@ -5,22 +5,18 @@ import getAccounts from "@salesforce/apex/AccountController.getAllAccounts";
 
 import searchAccounts from "@salesforce/apex/AccountController.getAccountsByName";
 
-import createAccount 
-from "@salesforce/apex/AccountController.createAccount";
+import createAccount from "@salesforce/apex/AccountController.createAccount";
 
-import deleteAccount 
-from "@salesforce/apex/AccountController.deleteAccount";
+import deleteAccount from "@salesforce/apex/AccountController.deleteAccount";
 
-export default class AccountDashboard extends LightningElement 
-{
+export default class AccountDashboard extends LightningElement {
   @track searchTerm = "";
 
   @track newAccountName = "";
 
   @track accounts = [];
 
-  connectedCallback() 
-  {
+  connectedCallback() {
     this.loadAccounts();
   }
 

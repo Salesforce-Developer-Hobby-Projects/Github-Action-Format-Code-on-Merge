@@ -80,8 +80,16 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4.1.6
         with:
           branch: main
-          file_pattern: '*.js *.cls'
+          # file_pattern: '*.js *.cls'
           commit_message: Format changed file with prettier
           # commit_user_name: My GitHub Actions Bot # defaults to "github-actions[bot]"
           commit_user_email: andrew.chen+github-actions-bot@tython.co # defaults to "41898282+github-actions[bot]@users.noreply.github.com"
           # commit_author: Author <actions@github.com> # defaults to author of the commit that triggered the run
+
+      - name: "Run if changes have been detected"
+        if: steps.auto-commit-action.outputs.changes_detected == 'true'
+        run: echo "Changes!"
+
+      - name: "Run if no changes have been detected"
+        if: steps.auto-commit-action.outputs.changes_detected == 'false'
+        run: echo "No Changes!"

@@ -7,12 +7,16 @@ public class AccountController
     {
 // this comment has weird indentation
                                 // this comment has weird indentation as well
-        return [SELECT Id, Name FROM Account] ;
+        return [
+            SELECT Id, Name FROM Account
+            ] ;
     }
 
     @AuraEnabled
     public 
-    static List<Account> getAccountsByName( String name ) 
+    static List<Account> getAccountsByName( 
+        String name
+         ) 
     {
         // if name is null or empty, return all accounts
         if (String.isBlank( name )) 

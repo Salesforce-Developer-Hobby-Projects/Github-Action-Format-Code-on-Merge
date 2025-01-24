@@ -5,7 +5,8 @@ import { LightningElement, track,
 import getAccounts 
 from "@salesforce/apex/AccountController.getAllAccounts";
 
-import searchAccounts from 
+import searchAccounts 
+from 
 "@salesforce/apex/AccountController.getAccountsByName";
 
 import 

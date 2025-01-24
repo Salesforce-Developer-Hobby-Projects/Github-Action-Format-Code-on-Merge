@@ -11,6 +11,8 @@ public class AccountController
             SELECT Id, Name FROM Account
             ] ;
     }
+    return [SELECT Id, Name FROM Account WHERE Name LIKE :name];
+  }
 
     @AuraEnabled
     public 
@@ -26,43 +28,42 @@ public class AccountController
         return [SELECT Id, Name FROM Account WHERE Name LIKE :name];
     }
 
-    @AuraEnabled
-    public static Id createAccount( Account account ) 
-    {
-        try 
-        {
+      if (!result.isSuccess()) {
+        System.debug(
+          'Error creating account: ' + result.getErrors()[0].getMessage()
+        );
 
-            Database.SaveResult result = Database.insert( account, true ) ;
-            
-            if (!result.isSuccess()) 
-            {
+        throw new AuraHandledException(
+          'Error creating account: ' + result.getErrors()[0].getMessage()
+        );
+      }
 
-                System.debug('Error creating account: ' + result.getErrors()[0].getMessage());
-                
-                throw new AuraHandledException('Error creating account: ' + result.getErrors()[0].getMessage());
-            }
-
-            return result.getId();
-        } 
-        catch (DmlException e) 
-        {
-            System.debug('Error creating account: ' + e.getMessage());
-            throw new AuraHandledException('Error creating account: ' + e.getMessage());
-        }
-    }
-
-    @AuraEnabled
-    public static void deleteAccount( Id accountId ) {
-        try {
-            Database.DeleteResult result = Database.delete(accountId, true);
-            if (!result.isSuccess()) {
-                System.debug('Error deleting account: ' + result.getErrors()[0].getMessage());
-                throw new AuraHandledException('Error deleting account: ' + result.getErrors()[0].getMessage());
-            }
-        } 
-        catch (DmlException e) {
-            System.debug('Error deleting account: ' + e.getMessage());
-            throw new AuraHandledException('Error deleting account: ' + e.getMessage());
-        }
+      return result.getId();
+    } catch (DmlException e) {
+      System.debug('Error creating account: ' + e.getMessage());
+      throw new AuraHandledException(
+        'Error creating account: ' + e.getMessage()
+      );
     }
   }
+
+  @AuraEnabled
+  public static void deleteAccount(Id accountId) {
+    try {
+      Database.DeleteResult result = Database.delete(accountId, true);
+      if (!result.isSuccess()) {
+        System.debug(
+          'Error deleting account: ' + result.getErrors()[0].getMessage()
+        );
+        throw new AuraHandledException(
+          'Error deleting account: ' + result.getErrors()[0].getMessage()
+        );
+      }
+    } catch (DmlException e) {
+      System.debug('Error deleting account: ' + e.getMessage());
+      throw new AuraHandledException(
+        'Error deleting account: ' + e.getMessage()
+      );
+    }
+  }
+}

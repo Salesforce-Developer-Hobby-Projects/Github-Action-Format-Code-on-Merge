@@ -13,10 +13,8 @@ createAccount from "@salesforce/apex/AccountController.createAccount";
 
 import deleteAccount from "@salesforce/apex/AccountController.deleteAccount";
 
-export default 
-class AccountDashboard extends LightningElement 
-{
-    @track searchTerm = '';
+export default class AccountDashboard extends LightningElement {
+  @track searchTerm = "";
 
   @track newAccountName = "";
 
@@ -46,7 +44,9 @@ class AccountDashboard extends LightningElement
   }
 
   searchAccounts() {
-    searchAccounts({ name: this.searchTerm })
+    searchAccounts({
+      name: this.searchTerm
+    })
       .then((result) => {
         this.accounts = result || [];
       })
@@ -60,7 +60,9 @@ class AccountDashboard extends LightningElement
   }
 
   handleCreate() {
-    createAccount({ name: this.newAccountName })
+    createAccount({
+      name: this.newAccountName
+    })
       .then(() => {
         this.newAccountName = "";
         this.loadAccounts();

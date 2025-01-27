@@ -53,7 +53,7 @@ jobs:
 
       - name: Prettify code
         id: prettier
-        uses: creyD/prettier_action@v4.3
+        uses: creyD/prettier_action@dev
         with:
           prettier_plugins: "prettier-plugin-apex @prettier/plugin-xml"
           # prettier_options: --check **/*.{js,md,html,css,cls}
@@ -86,10 +86,10 @@ jobs:
           commit_user_email: andrew.chen+github-actions-bot@tython.co # defaults to "41898282+github-actions[bot]@users.noreply.github.com"
           # commit_author: Author <actions@github.com> # defaults to author of the commit that triggered the run
 
-      - name: "Run if changes have been detected"
-        if: steps.auto-commit-action.outputs.changes_detected == 'true'
-        run: echo "Changes!"
+      # - name: "Run if changes have been detected"
+      #   if: steps.auto-commit-action.outputs.changes_detected == 'true'
+      #   run: echo "Changes!"
 
-      - name: "Run if no changes have been detected"
-        if: steps.auto-commit-action.outputs.changes_detected == 'false'
-        run: echo "No Changes!"
+      # - name: "Run if no changes have been detected"
+      #   if: steps.auto-commit-action.outputs.changes_detected == 'false'
+      #   run: echo "No Changes!"

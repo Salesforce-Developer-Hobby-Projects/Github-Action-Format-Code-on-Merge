@@ -16,15 +16,16 @@ import deleteAccount from "@salesforce/apex/AccountController.deleteAccount";
 
 export default class AccountDashboard extends LightningElement 
 {
-  @track searchTerm = "";
+  @track searchTerm = ""
 
-  @track newAccountName = "";
+  @track newAccountName = ""
 
   @track accounts = [];
 
   connectedCallback() 
   {
-    this.loadAccounts();
+    this
+    .loadAccounts();
   }
 
   loadAccounts() 

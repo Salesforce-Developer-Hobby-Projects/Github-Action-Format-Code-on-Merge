@@ -1,5 +1,4 @@
 @AuraEnabled
-
 public class AccountController 
 
 {
@@ -9,7 +8,8 @@ public class AccountController
     {
 // this comment has weird indentation
                                 // this comment has weird indentation as well
-        return [SELECT Id, Name FROM Account] ;
+        return [
+            SELECT Id, Name FROM Account] ;
     }
 
     @AuraEnabled

@@ -1,38 +1,28 @@
 // AccountDashboard.js
-import { LightningElement, track, 
-  wire } from "lwc";
+import { LightningElement, track, wire } from "lwc";
 
-import getAccounts 
-from "@salesforce/apex/AccountController.getAllAccounts";
+import getAccounts from "@salesforce/apex/AccountController.getAllAccounts";
 
-import searchAccounts 
-from 
-"@salesforce/apex/AccountController.getAccountsByName";
+import searchAccounts from "@salesforce/apex/AccountController.getAccountsByName";
 
-import 
-createAccount from "@salesforce/apex/AccountController.createAccount";
+import createAccount from "@salesforce/apex/AccountController.createAccount";
 
 import deleteAccount from "@salesforce/apex/AccountController.deleteAccount";
 
-export default class AccountDashboard extends LightningElement 
-{
+export default class AccountDashboard extends LightningElement {
   @track searchTerm = "";
 
   @track newAccountName = "";
 
   @track accounts = [];
 
-  connectedCallback() 
-  {
+  connectedCallback() {
     this.loadAccounts();
   }
 
-  loadAccounts() 
-  {
+  loadAccounts() {
     getAccounts()
-      .then((
-        result
-      ) => {
+      .then((result) => {
         this.accounts = result || [];
       })
       .catch((error) => {
@@ -74,14 +64,14 @@ export default class AccountDashboard extends LightningElement
       });
   }
 
-    handleDelete(event) {
-        const accountId = event.target.dataset.accountId;
-        deleteAccount({ accountId })
-            .then(() => {
-                this.loadAccounts();
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }
+  handleDelete(event) {
+    const accountId = event.target.dataset.accountId;
+    deleteAccount({ accountId })
+      .then(() => {
+        this.loadAccounts();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 }

@@ -14,7 +14,8 @@ createAccount from "@salesforce/apex/AccountController.createAccount";
 
 import deleteAccount from "@salesforce/apex/AccountController.deleteAccount";
 
-export default class AccountDashboard extends LightningElement {
+export default class AccountDashboard extends LightningElement 
+{
   @track searchTerm = "";
 
   @track newAccountName = "";
